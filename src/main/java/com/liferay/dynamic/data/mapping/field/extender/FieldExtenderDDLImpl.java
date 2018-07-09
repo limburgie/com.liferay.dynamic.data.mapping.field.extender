@@ -79,7 +79,10 @@ public class FieldExtenderDDLImpl extends DDMImpl {
 			JSONObject object = jsonArray.getJSONObject(i);
 			DDMFormField ddmFormField = ddmFormFields.get(i);
 
-			//TODO if custom DDM field attributes are used, put them on the JSONObject here.
+			//TODO if custom field attributes are used, put them on the JSONObject here.
+			if ("ddm-users".equals(ddmFormField.getType())) {
+				object.put("multiItem", ddmFormField.getProperty("multiItem"));
+			}
 		}
 
 		return jsonArray;

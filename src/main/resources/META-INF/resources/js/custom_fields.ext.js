@@ -1513,6 +1513,53 @@ AUI.add(
 		);
 
 		//TODO add new field definitions here
+		var multipleOptions = {
+			'false': Liferay.Language.get('no'),
+			'true': Liferay.Language.get('yes')
+		};
+
+		var DDMUserField = A.Component.create({
+			ATTRS: {
+				multiItem: {
+					value: 'false'
+				},
+				dataType: {
+					value: 'string'
+				},
+				fieldNamespace: {
+					value: 'ddm'
+				}
+			},
+
+			EXTENDS: FormBuilderTextField,
+
+			NAME: 'ddm-users',
+
+			prototype: {
+				getHTML: function() {
+					return '<div class="lfr-ddm-users">' +
+						'<input type="text" readonly="true" value="User Field" />' +
+						'</div>';
+				},
+				getPropertyModel: function() {
+					var instance = this;
+
+					var model = originalGetPropertyModel.call(instance);
+
+					return model.concat([{
+						attributeName: 'multiItem',
+						editor: new A.RadioCellEditor(
+							{
+								options: multipleOptions
+							}),
+						formatter: function(val) {
+							return multipleOptions[val.data.value];
+						},
+						name: 'multiple'
+					}]);
+				}
+			}
+		});
 
 		var plugins = [
 			DDMDateField,
@@ -1527,8 +1574,9 @@ AUI.add(
 			DDMParagraphField,
 			DDMSeparatorField,
 			DDMHTMLTextField,
-			DDMTextAreaField
+			DDMTextAreaField,
 			//TODO add field object to this list
+			DDMUserField
 		];
 
 		plugins.forEach(
