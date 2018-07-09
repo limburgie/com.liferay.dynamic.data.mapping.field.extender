@@ -185,9 +185,8 @@ AUI.add(
 							type: Liferay.Language.get('type'),
 							value: Liferay.Language.get('value'),
 							width: Liferay.Language.get('width'),
-							yes: Liferay.Language.get('yes'),
+							yes: Liferay.Language.get('yes')
 							//TODO add translations for labels of new field attributes
-							multiItem: Liferay.Language.get('multiItem')
 						}
 					},
 
@@ -234,7 +233,7 @@ AUI.add(
 				UNIQUE_FIELD_NAMES_MAP: new A.Map(),
 
 				//TODO add new field attributes to this list
-				UNLOCALIZABLE_FIELD_ATTRS: ['dataType', 'fieldNamespace', 'indexType', 'localizable', 'multiple', 'name', 'readOnly', 'repeatable', 'required', 'showLabel', 'type', 'multiItem'],
+				UNLOCALIZABLE_FIELD_ATTRS: ['dataType', 'fieldNamespace', 'indexType', 'localizable', 'multiple', 'name', 'readOnly', 'repeatable', 'required', 'showLabel', 'type'],
 
 				prototype: {
 					initializer: function() {
@@ -809,7 +808,6 @@ AUI.add(
 
 		LiferayFormBuilder.DEFAULT_ICON_CLASS = 'icon-fb-custom-field';
 
-		//TODO add field type to the proper list (probably DDM_STRUCTURE)
 		var AVAILABLE_FIELDS = {
 			DDM_STRUCTURE: [
 				{
@@ -895,13 +893,8 @@ AUI.add(
 					iconClass: 'icon-fb-text-box',
 					label: Liferay.Language.get('text-box'),
 					type: 'textarea'
-				},
-				{
-					hiddenAttributes: MAP_HIDDEN_FIELD_ATTRS.DEFAULT,
-					iconClass: 'icon-user',
-					label: Liferay.Language.get('users'),
-					type: 'ddm-users'
 				}
+				//TODO add field type to this list
 			],
 
 			DDM_TEMPLATE: [
