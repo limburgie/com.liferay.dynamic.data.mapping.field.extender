@@ -472,7 +472,7 @@ public class FieldExtenderDDMFormFieldRenderer implements DDMFormFieldRenderer {
 	private static final String _DEFAULT_READ_ONLY_NAMESPACE = "readonly";
 
 	//TODO add custom field types to this list
-	private static final String[] _SUPPORTED_DDM_FORM_FIELD_TYPES = { "ddm-users" };
+	private static final String[] _SUPPORTED_DDM_FORM_FIELD_TYPES = { "ddm-rest-select" };
 
 	private static final String _TPL_EXT = ".ftl";
 

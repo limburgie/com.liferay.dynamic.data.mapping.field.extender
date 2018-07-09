@@ -80,8 +80,12 @@ public class FieldExtenderDDLImpl extends DDMImpl {
 			DDMFormField ddmFormField = ddmFormFields.get(i);
 
 			//TODO if custom field attributes are used, put them on the JSONObject here.
-			if ("ddm-users".equals(ddmFormField.getType())) {
-				object.put("multiItem", ddmFormField.getProperty("multiItem"));
+			if ("ddm-rest-select".equals(ddmFormField.getType())) {
+				object.put("restUrl", ddmFormField.getProperty("restUrl"));
+				object.put("restKey", ddmFormField.getProperty("restKey"));
+				object.put("restValue", ddmFormField.getProperty("restValue"));
+				object.put("restUsername", ddmFormField.getProperty("restUsername"));
+				object.put("restPassword", ddmFormField.getProperty("restPassword"));
 			}
 		}
 

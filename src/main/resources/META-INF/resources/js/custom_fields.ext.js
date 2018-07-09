@@ -1513,53 +1513,80 @@ AUI.add(
 		);
 
 		//TODO add new field definitions here
-		var multipleOptions = {
-			'false': Liferay.Language.get('no'),
-			'true': Liferay.Language.get('yes')
-		};
-
-		var DDMUserField = A.Component.create({
-			ATTRS: {
-				multiItem: {
-					value: 'false'
+		var DDMRestSelectField = A.Component.create(
+			{
+				ATTRS: {
+					restUrl: {
+						value: 'http://localhost:8080/api/jsonws'
+					},
+					restKey: {
+						value: ''
+					},
+					restValue: {
+						value: ''
+					},
+					restUsername: {
+						value: ''
+					},
+					restPassword: {
+						value: ''
+					},
+					dataType: {
+						value: 'string'
+					},
+					fieldNamespace: {
+						value: 'ddm'
+					}
 				},
-				dataType: {
-					value: 'string'
-				},
-				fieldNamespace: {
-					value: 'ddm'
-				}
-			},
 
-			EXTENDS: FormBuilderTextField,
+				EXTENDS: FormBuilderTextField,
 
-			NAME: 'ddm-users',
+				NAME: 'ddm-rest-select',
 
-			prototype: {
-				getHTML: function() {
-					return '<div class="lfr-ddm-users">' +
-						'<input type="text" readonly="true" value="User Field" />' +
-						'</div>';
-				},
-				getPropertyModel: function() {
-					var instance = this;
+				prototype: {
+					getHTML: function() {
+						return '<div class="lfr-ddm-rest-select">' +
+							'<select><option>REST select</option></select>' +
+							'</div>';
+					},
+					getPropertyModel: function() {
+						var instance = this;
 
-					var model = originalGetPropertyModel.call(instance);
+						var model = originalGetPropertyModel.call(instance);
 
-					return model.concat([{
-						attributeName: 'multiItem',
-						editor: new A.RadioCellEditor(
-							{
-								options: multipleOptions
-							}),
-						formatter: function(val) {
-							return multipleOptions[val.data.value];
-						},
-						name: 'multiple'
-					}]);
+						return model.concat(
+							[
+								{
+									attributeName: 'restUrl',
+									editor: new A.TextCellEditor(),
+									name: 'restUrl'
+								},
+								{
+									attributeName: 'restKey',
+									editor: new A.TextCellEditor(),
+									name: 'restKey'
+								},
+								{
+									attributeName: 'restValue',
+									editor: new A.TextCellEditor(),
+									name: 'restValue'
+								},
+								{
+									attributeName: 'restUsername',
+									editor: new A.TextCellEditor(),
+									name: 'restUsername'
+								},
+								{
+									attributeName: 'restPassword',
+									editor: new A.TextCellEditor(),
+									name: 'restPassword'
+								}
+							]
+						);
+					}
 				}
 			}
-		});
+		);
 
 		var plugins = [
 			DDMDateField,
@@ -1576,7 +1603,7 @@ AUI.add(
 			DDMHTMLTextField,
 			DDMTextAreaField,
 			//TODO add field object to this list
-			DDMUserField
+			DDMRestSelectField
 		];
 
 		plugins.forEach(

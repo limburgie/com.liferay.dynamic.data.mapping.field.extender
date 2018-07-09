@@ -20,30 +20,17 @@ import com.liferay.portal.kernel.util.StringPool;
  * If that fails or if the screen name is null or empty,
  */
 @Component(immediate = true, service = DDMFormFieldValueRenderer.class)
-public class UserDDMFormFieldValueRenderer extends BaseDDMFormFieldValueRenderer {
-
-	@Reference private UserLocalService userLocalService;
-	@Reference private Portal portal;
+public class RestSelectDDMFormFieldValueRenderer extends BaseDDMFormFieldValueRenderer {
 
 	protected ValueAccessor getValueAcessor(Locale locale) {
 		return new ValueAccessor(locale) {
 			public String get(DDMFormFieldValue ddmFormFieldValue) {
-				String screenName = ddmFormFieldValue.getValue().getString(locale);
-
-				if (screenName != null) {
-					try {
-						return userLocalService.getUserByScreenName(portal.getDefaultCompanyId(), screenName).getFullName();
-					} catch (PortalException e) {
-						return screenName;
-					}
-				}
-
-				return StringPool.BLANK;
+				return ddmFormFieldValue.getValue().getString(locale);
 			}
 		};
 	}
 
 	public String getSupportedDDMFormFieldType() {
-		return "ddm-users";
+		return "ddm-rest-select";
 	}
 }

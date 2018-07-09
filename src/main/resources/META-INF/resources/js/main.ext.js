@@ -187,7 +187,11 @@ AUI.add(
 							width: Liferay.Language.get('width'),
 							yes: Liferay.Language.get('yes'),
 							//TODO add translations for labels of new field attributes
-							multiItem: Liferay.Language.get('multiItem')
+							restUrl: 'REST endpoint',
+							restKey: 'REST response key',
+							restValue: 'REST response value',
+							restUsername: 'REST username',
+							restPassword: 'REST password'
 						}
 					},
 
@@ -234,7 +238,7 @@ AUI.add(
 				UNIQUE_FIELD_NAMES_MAP: new A.Map(),
 
 				//TODO add new field attributes to this list
-				UNLOCALIZABLE_FIELD_ATTRS: ['dataType', 'fieldNamespace', 'indexType', 'localizable', 'multiple', 'name', 'readOnly', 'repeatable', 'required', 'showLabel', 'type', 'multiItem'],
+				UNLOCALIZABLE_FIELD_ATTRS: ['dataType', 'fieldNamespace', 'indexType', 'localizable', 'multiple', 'name', 'readOnly', 'repeatable', 'required', 'showLabel', 'type', 'restUrl', 'restKey', 'restValue', 'restUsername', 'restPassword'],
 
 				prototype: {
 					initializer: function() {
@@ -898,9 +902,9 @@ AUI.add(
 				},
 				{
 					hiddenAttributes: MAP_HIDDEN_FIELD_ATTRS.DEFAULT,
-					iconClass: 'icon-user',
-					label: Liferay.Language.get('users'),
-					type: 'ddm-users'
+					iconClass: 'icon-fb-select',
+					label: Liferay.Language.get('rest-select'),
+					type: 'ddm-rest-select'
 				}
 			],
 

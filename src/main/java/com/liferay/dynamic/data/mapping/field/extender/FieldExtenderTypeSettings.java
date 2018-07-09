@@ -110,8 +110,20 @@ public interface FieldExtenderTypeSettings extends DDMFormFieldTypeSettings {
 	@DDMFormField(label = "%show-label", properties = {"showAsSwitcher=true"})
 	public boolean showLabel();
 
-	@DDMFormField(label = "%multiItem")
-	public String multiItem();
+	@DDMFormField(label = "%restUrl")
+	public String restUrl();
+
+	@DDMFormField(label = "%restKey")
+	public String restKey();
+
+	@DDMFormField(label = "%restValue")
+	public String restValue();
+
+	@DDMFormField(label = "%restUsername")
+	public String restUsername();
+
+	@DDMFormField(label = "%restPassword")
+	public String restPassword();
 
 	@DDMFormField(
 			label = "%help-text",

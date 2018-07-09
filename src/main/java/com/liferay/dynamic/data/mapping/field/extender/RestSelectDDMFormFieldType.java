@@ -12,17 +12,17 @@ import com.liferay.dynamic.data.mapping.form.field.type.DDMFormFieldTypeSettings
 @Component(
 		immediate = true,
 		property = {
-				"ddm.form.field.type.name=ddm-users"
+				"ddm.form.field.type.name=ddm-rest-select"
 		},
 		service = DDMFormFieldType.class
 )
-public class UserDDMFormFieldType implements DDMFormFieldType {
+public class RestSelectDDMFormFieldType implements DDMFormFieldType {
 
 	public Class<? extends DDMFormFieldTypeSettings> getDDMFormFieldTypeSettings() {
 		return FieldExtenderTypeSettings.class;
 	}
 
 	public String getName() {
-		return "ddm-users";
+		return "ddm-rest-select";
 	}
 }

@@ -1,5 +1,7 @@
 <#include "../init-ext.ftl">
 
+REST select
+<#--
 <#assign userLocalService = serviceLocator.findService("com.liferay.portal.kernel.service.UserLocalService")>
 <#assign multiple = false>
 <#if fieldStructure.multiItem?? && (escape(fieldStructure.multiItem) == "true")>
@@ -144,3 +146,4 @@
 	);
 </script>
 </@>
+-->
