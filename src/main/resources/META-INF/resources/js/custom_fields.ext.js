@@ -1545,9 +1545,7 @@ AUI.add(
 
 				prototype: {
 					getHTML: function() {
-						return '<div class="lfr-ddm-rest-select">' +
-							'<select><option>REST select</option></select>' +
-							'</div>';
+						return '<select class="form-builder-field-node form-control"><option></option></select>';
 					},
 					getPropertyModel: function() {
 						var instance = this;
@@ -1558,28 +1556,28 @@ AUI.add(
 							[
 								{
 									attributeName: 'restUrl',
-									editor: new A.TextCellEditor(),
-									name: 'restUrl'
-								},
-								{
-									attributeName: 'restKey',
-									editor: new A.TextCellEditor(),
-									name: 'restKey'
-								},
-								{
-									attributeName: 'restValue',
-									editor: new A.TextCellEditor(),
-									name: 'restValue'
+									editor: new A.TextAreaCellEditor(),
+									name: 'Endpoint URL'
 								},
 								{
 									attributeName: 'restUsername',
 									editor: new A.TextCellEditor(),
-									name: 'restUsername'
+									name: 'Username'
 								},
 								{
 									attributeName: 'restPassword',
 									editor: new A.TextCellEditor(),
-									name: 'restPassword'
+									name: 'Password'
+								},
+								{
+									attributeName: 'restKey',
+									editor: new A.TextCellEditor(),
+									name: 'Option label mapping'
+								},
+								{
+									attributeName: 'restValue',
+									editor: new A.TextCellEditor(),
+									name: 'Option value mapping'
 								}
 							]
 						);

@@ -185,13 +185,8 @@ AUI.add(
 							type: Liferay.Language.get('type'),
 							value: Liferay.Language.get('value'),
 							width: Liferay.Language.get('width'),
-							yes: Liferay.Language.get('yes'),
+							yes: Liferay.Language.get('yes')
 							//TODO add translations for labels of new field attributes
-							restUrl: 'REST endpoint',
-							restKey: 'REST response key',
-							restValue: 'REST response value',
-							restUsername: 'REST username',
-							restPassword: 'REST password'
 						}
 					},
 
@@ -903,7 +898,7 @@ AUI.add(
 				{
 					hiddenAttributes: MAP_HIDDEN_FIELD_ATTRS.DEFAULT,
 					iconClass: 'icon-fb-select',
-					label: Liferay.Language.get('rest-select'),
+					label: 'REST Select',
 					type: 'ddm-rest-select'
 				}
 			],
