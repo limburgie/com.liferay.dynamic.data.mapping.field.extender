@@ -119,12 +119,6 @@ public interface FieldExtenderTypeSettings extends DDMFormFieldTypeSettings {
 	@DDMFormField(label = "%restValue")
 	public String restValue();
 
-	@DDMFormField(label = "%restUsername")
-	public String restUsername();
-
-	@DDMFormField(label = "%restPassword")
-	public String restPassword();
-
 	@DDMFormField(
 			label = "%help-text",
 			properties = {

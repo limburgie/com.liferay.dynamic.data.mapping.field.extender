@@ -186,7 +186,6 @@ AUI.add(
 							value: Liferay.Language.get('value'),
 							width: Liferay.Language.get('width'),
 							yes: Liferay.Language.get('yes')
-							//TODO add translations for labels of new field attributes
 						}
 					},
 
@@ -233,7 +232,7 @@ AUI.add(
 				UNIQUE_FIELD_NAMES_MAP: new A.Map(),
 
 				//TODO add new field attributes to this list
-				UNLOCALIZABLE_FIELD_ATTRS: ['dataType', 'fieldNamespace', 'indexType', 'localizable', 'multiple', 'name', 'readOnly', 'repeatable', 'required', 'showLabel', 'type', 'restUrl', 'restKey', 'restValue', 'restUsername', 'restPassword'],
+				UNLOCALIZABLE_FIELD_ATTRS: ['dataType', 'fieldNamespace', 'indexType', 'localizable', 'multiple', 'name', 'readOnly', 'repeatable', 'required', 'showLabel', 'type', 'restUrl', 'restKey', 'restValue'],
 
 				prototype: {
 					initializer: function() {

@@ -1525,12 +1525,6 @@ AUI.add(
 					restValue: {
 						value: ''
 					},
-					restUsername: {
-						value: ''
-					},
-					restPassword: {
-						value: ''
-					},
 					dataType: {
 						value: 'string'
 					},
@@ -1558,16 +1552,6 @@ AUI.add(
 									attributeName: 'restUrl',
 									editor: new A.TextAreaCellEditor(),
 									name: 'Endpoint URL'
-								},
-								{
-									attributeName: 'restUsername',
-									editor: new A.TextCellEditor(),
-									name: 'Username'
-								},
-								{
-									attributeName: 'restPassword',
-									editor: new A.TextCellEditor(),
-									name: 'Password'
 								},
 								{
 									attributeName: 'restKey',

@@ -84,7 +84,6 @@ public class FieldExtenderDDMFormFieldRenderer implements DDMFormFieldRenderer {
 	}
 
 	protected void addStructureProperties(DDMFormField ddmFormField, Map<String, Object> fieldContext) {
-
 		fieldContext.put("dataType", ddmFormField.getDataType());
 		fieldContext.put("indexType", ddmFormField.getIndexType());
 		fieldContext.put("localizable", Boolean.toString(ddmFormField.isLocalizable()));
@@ -95,6 +94,11 @@ public class FieldExtenderDDMFormFieldRenderer implements DDMFormFieldRenderer {
 		fieldContext.put("required", Boolean.toString(ddmFormField.isRequired()));
 		fieldContext.put("showLabel", Boolean.toString(ddmFormField.isShowLabel()));
 		fieldContext.put("type", ddmFormField.getType());
+
+		//TODO add additional field attributes
+		fieldContext.put("restUrl", ddmFormField.getProperty("restUrl"));
+		fieldContext.put("restKey", ddmFormField.getProperty("restKey"));
+		fieldContext.put("restValue", ddmFormField.getProperty("restValue"));
 	}
 
 	protected int countFieldRepetition(String[] fieldsDisplayValues, String parentFieldName, int offset) {
