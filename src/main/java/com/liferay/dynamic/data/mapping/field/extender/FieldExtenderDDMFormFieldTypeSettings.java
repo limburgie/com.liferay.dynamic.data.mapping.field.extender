@@ -25,9 +25,10 @@ import com.liferay.portal.kernel.util.StringPool;
  */
 @DDMForm
 @DDMFormLayout(
-		{
+		paginationMode = com.liferay.dynamic.data.mapping.model.DDMFormLayout.TABBED_MODE,
+		value = {
 				@DDMFormLayoutPage(
-						title = "basic",
+						title = "%basic",
 						value = {
 								@DDMFormLayoutRow(
 										{
@@ -41,15 +42,15 @@ import com.liferay.portal.kernel.util.StringPool;
 						}
 				),
 				@DDMFormLayoutPage(
-						title = "advanced",
+						title = "%properties",
 						value = {
 								@DDMFormLayoutRow(
 										{
 												@DDMFormLayoutColumn(
 														size = 12,
 														value = {
-																"repeatable", "showLabel", "validation",
-																"visibilityExpression"
+																"dataType", "name", "showLabel", "repeatable",
+																"type", "validation", "visibilityExpression"
 														}
 												)
 										}
@@ -58,7 +59,8 @@ import com.liferay.portal.kernel.util.StringPool;
 				)
 		}
 )
-public interface FieldExtenderTypeSettings extends DDMFormFieldTypeSettings {
+public interface FieldExtenderDDMFormFieldTypeSettings
+		extends DDMFormFieldTypeSettings {
 
 	@DDMFormField(visibilityExpression = "FALSE")
 	public String fieldNamespace();
@@ -68,7 +70,8 @@ public interface FieldExtenderTypeSettings extends DDMFormFieldTypeSettings {
 			optionLabels = {
 					"%not-indexable", "%indexable-keyword", "%indexable-text"
 			},
-			optionValues = {StringPool.BLANK, "keyword", "text"}, type = "select",
+			optionValues = {StringPool.BLANK, "keyword", "text"},
+			predefinedValue = "keyword", type = "radio",
 			visibilityExpression = "FALSE"
 	)
 	public String indexType();
@@ -76,14 +79,17 @@ public interface FieldExtenderTypeSettings extends DDMFormFieldTypeSettings {
 	@DDMFormField(
 			label = "%label",
 			properties = {
-					"placeholder=%enter-a-field-label",
+					"autoFocus=true", "placeholder=%enter-a-field-label",
 					"tooltip=%enter-a-descriptive-field-label-that-guides-users-to-enter-the-information-you-want"
 			},
-			required = true, type = "key-value"
+			type = "key_value"
 	)
 	public LocalizedValue label();
 
-	@DDMFormField(label = "%localizable", visibilityExpression = "FALSE")
+	@DDMFormField(
+			label = "%localizable", predefinedValue = "true",
+			visibilityExpression = "FALSE"
+	)
 	public boolean localizable();
 
 	@DDMFormField(
@@ -99,15 +105,16 @@ public interface FieldExtenderTypeSettings extends DDMFormFieldTypeSettings {
 	@DDMFormField(label = "%read-only", visibilityExpression = "FALSE")
 	public boolean readOnly();
 
-	@DDMFormField(label = "%repeatable", properties = {"showAsSwitcher=true"})
+	@DDMFormField(label = "%repeatable", properties = "showAsSwitcher=true")
 	public boolean repeatable();
 
-	@DDMFormField(
-			label = "%required-field", properties = {"showAsSwitcher=true"}
-	)
+	@DDMFormField(label = "%required-field", properties = "showAsSwitcher=true")
 	public boolean required();
 
-	@DDMFormField(label = "%show-label", properties = {"showAsSwitcher=true"})
+	@DDMFormField(
+			label = "%show-label", predefinedValue = "true",
+			properties = "showAsSwitcher=true"
+	)
 	public boolean showLabel();
 
 	@DDMFormField(
@@ -121,21 +128,23 @@ public interface FieldExtenderTypeSettings extends DDMFormFieldTypeSettings {
 	public LocalizedValue tip();
 
 	@DDMFormField(
-			dataType = "ddm-validation", label = "%validation", type = "validation"
+			dataType = "string", label = "%validation", type = "validation"
 	)
 	public DDMFormFieldValidation validation();
 
 	/**
-	 * @deprecated As of 2.0.0
+	 * @deprecated As of Judson (7.1.x)
 	 */
 	@DDMFormField(
 			label = "%field-visibility-expression",
 			properties = {
 					"placeholder=%equals(Country, \"US\")",
 					"tooltip=%write-a-conditional-expression-to-control-whether-this-field-is-displayed"
-			}
+			},
+			visibilityExpression = "FALSE"
 	)
 	@Deprecated
 	public String visibilityExpression();
 
+	//TODO add any additionally defined DDM field attributes here
 }

@@ -390,6 +390,19 @@ AUI.add(
 								);
 							}
 						}
+
+						editor.after(
+							'render',
+							function() {
+								editor.set('visible', true);
+
+								var boundingBox = editor.get('boundingBox');
+
+								if (boundingBox) {
+									boundingBox.show();
+								}
+							}
+						);
 					},
 
 					_deserializeField: function(fieldJSON, availableLanguageIds) {
@@ -814,6 +827,12 @@ AUI.add(
 					iconClass: 'icon-fb-boolean',
 					label: Liferay.Language.get('boolean'),
 					type: 'checkbox'
+				},
+				{
+					hiddenAttributes: MAP_HIDDEN_FIELD_ATTRS.DEFAULT,
+					iconClass: 'icon-adjust',
+					label: Liferay.Language.get('color'),
+					type: 'ddm-color'
 				},
 				{
 					hiddenAttributes: MAP_HIDDEN_FIELD_ATTRS.DEFAULT,
