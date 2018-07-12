@@ -21,7 +21,7 @@ import com.liferay.dynamic.data.mapping.model.LocalizedValue;
 import com.liferay.portal.kernel.util.StringPool;
 
 /**
- * This TypeSettings class extends the default typesettings with custom property definitions.
+ * This TypeSettings class extends the default typesettings with custom DDM field attribute definitions.
  */
 @DDMForm
 @DDMFormLayout(
