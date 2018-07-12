@@ -185,9 +185,7 @@ AUI.add(
 							type: Liferay.Language.get('type'),
 							value: Liferay.Language.get('value'),
 							width: Liferay.Language.get('width'),
-							yes: Liferay.Language.get('yes'),
-							//TODO add translations for labels of new field attributes
-							multiItem: Liferay.Language.get('multiItem')
+							yes: Liferay.Language.get('yes')
 						}
 					},
 
