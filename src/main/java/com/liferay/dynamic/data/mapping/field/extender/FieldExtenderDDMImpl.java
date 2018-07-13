@@ -34,7 +34,7 @@ import com.liferay.portal.kernel.util.Portal;
 		},
 		service = DDM.class
 )
-public class FieldExtenderDDLImpl extends DDMImpl {
+public class FieldExtenderDDMImpl extends DDMImpl {
 
 	@Reference private Http _http;
 	@Reference private Portal _portal;
@@ -79,7 +79,7 @@ public class FieldExtenderDDLImpl extends DDMImpl {
 			JSONObject object = jsonArray.getJSONObject(i);
 			DDMFormField ddmFormField = ddmFormFields.get(i);
 
-			//TODO if custom field attributes are used, put them on the JSONObject here.
+			//TODO if custom DDM field attributes are used, put them on the JSONObject here.
 			if ("ddm-rest-select".equals(ddmFormField.getType())) {
 				object.put("restUrl", ddmFormField.getProperty("restUrl"));
 				object.put("restKey", ddmFormField.getProperty("restKey"));

@@ -21,7 +21,7 @@ import com.liferay.dynamic.data.mapping.model.LocalizedValue;
 import com.liferay.portal.kernel.util.StringPool;
 
 /**
- * This TypeSettings class extends the default typesettings with custom property definitions.
+ * This TypeSettings class extends the default typesettings with custom DDM field attribute definitions.
  */
 @DDMForm
 @DDMFormLayout(
@@ -58,7 +58,7 @@ import com.liferay.portal.kernel.util.StringPool;
 				)
 		}
 )
-public interface FieldExtenderTypeSettings extends DDMFormFieldTypeSettings {
+public interface FieldExtenderDDMFormFieldTypeSettings extends DDMFormFieldTypeSettings {
 
 	@DDMFormField(visibilityExpression = "FALSE")
 	public String fieldNamespace();

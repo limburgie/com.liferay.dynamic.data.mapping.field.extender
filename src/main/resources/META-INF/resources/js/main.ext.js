@@ -807,7 +807,6 @@ AUI.add(
 
 		LiferayFormBuilder.DEFAULT_ICON_CLASS = 'icon-fb-custom-field';
 
-		//TODO add field type to the proper list (probably DDM_STRUCTURE)
 		var AVAILABLE_FIELDS = {
 			DDM_STRUCTURE: [
 				{
@@ -894,6 +893,7 @@ AUI.add(
 					label: Liferay.Language.get('text-box'),
 					type: 'textarea'
 				},
+				//TODO add field type to this list
 				{
 					hiddenAttributes: MAP_HIDDEN_FIELD_ATTRS.DEFAULT,
 					iconClass: 'icon-fb-select',

@@ -6,7 +6,7 @@ import com.liferay.dynamic.data.mapping.form.field.type.DDMFormFieldType;
 import com.liferay.dynamic.data.mapping.form.field.type.DDMFormFieldTypeSettings;
 
 /**
- * This custom form field type tells Liferay to use the properties defined in FieldExtenderTypeSettings.class
+ * This custom form field type tells Liferay to use the properties defined in FieldExtenderDDMFormFieldTypeSettings.class
  * for the custom DDM structure "ddm-users".
  */
 @Component(
@@ -19,7 +19,7 @@ import com.liferay.dynamic.data.mapping.form.field.type.DDMFormFieldTypeSettings
 public class RestSelectDDMFormFieldType implements DDMFormFieldType {
 
 	public Class<? extends DDMFormFieldTypeSettings> getDDMFormFieldTypeSettings() {
-		return FieldExtenderTypeSettings.class;
+		return FieldExtenderDDMFormFieldTypeSettings.class;
 	}
 
 	public String getName() {
