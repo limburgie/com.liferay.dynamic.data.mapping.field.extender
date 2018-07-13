@@ -58,7 +58,7 @@ import com.liferay.portal.kernel.util.StringPool;
 				)
 		}
 )
-public interface FieldExtenderTypeSettings extends DDMFormFieldTypeSettings {
+public interface FieldExtenderDDMFormFieldTypeSettings extends DDMFormFieldTypeSettings {
 
 	@DDMFormField(visibilityExpression = "FALSE")
 	public String fieldNamespace();

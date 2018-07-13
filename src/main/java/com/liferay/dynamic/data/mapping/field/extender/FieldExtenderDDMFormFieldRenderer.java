@@ -84,7 +84,6 @@ public class FieldExtenderDDMFormFieldRenderer implements DDMFormFieldRenderer {
 	}
 
 	protected void addStructureProperties(DDMFormField ddmFormField, Map<String, Object> fieldContext) {
-
 		fieldContext.put("dataType", ddmFormField.getDataType());
 		fieldContext.put("indexType", ddmFormField.getIndexType());
 		fieldContext.put("localizable", Boolean.toString(ddmFormField.isLocalizable()));
