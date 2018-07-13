@@ -94,6 +94,8 @@ public class FieldExtenderDDMFormFieldRenderer implements DDMFormFieldRenderer {
 		fieldContext.put("required", Boolean.toString(ddmFormField.isRequired()));
 		fieldContext.put("showLabel", Boolean.toString(ddmFormField.isShowLabel()));
 		fieldContext.put("type", ddmFormField.getType());
+
+		//TODO add additional field attributes
 	}
 
 	protected int countFieldRepetition(String[] fieldsDisplayValues, String parentFieldName, int offset) {
