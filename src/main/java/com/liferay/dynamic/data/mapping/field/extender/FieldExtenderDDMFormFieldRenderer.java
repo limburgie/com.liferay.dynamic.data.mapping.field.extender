@@ -10,15 +10,12 @@ import javax.servlet.http.HttpServletResponse;
 import org.osgi.service.component.annotations.Component;
 
 import com.liferay.dynamic.data.mapping.constants.DDMPortletKeys;
-import com.liferay.dynamic.data.mapping.internal.render.DDMFormFieldFreeMarkerRenderer;
-import com.liferay.dynamic.data.mapping.internal.util.DDMFieldsCounter;
-import com.liferay.dynamic.data.mapping.internal.util.DDMFormFieldFreeMarkerRendererHelper;
-import com.liferay.dynamic.data.mapping.internal.util.DDMImpl;
 import com.liferay.dynamic.data.mapping.model.*;
 import com.liferay.dynamic.data.mapping.render.DDMFormFieldRenderer;
 import com.liferay.dynamic.data.mapping.render.DDMFormFieldRenderingContext;
 import com.liferay.dynamic.data.mapping.storage.Field;
 import com.liferay.dynamic.data.mapping.storage.Fields;
+import com.liferay.dynamic.data.mapping.util.DDMFieldsCounter;
 import com.liferay.portal.kernel.editor.Editor;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.io.unsync.UnsyncStringWriter;
@@ -364,7 +361,7 @@ public class FieldExtenderDDMFormFieldRenderer implements DDMFormFieldRenderer {
 		String fieldsDisplayValue = fieldsDisplayValues[offset];
 
 		return StringUtil.extractLast(
-				fieldsDisplayValue, DDMImpl.INSTANCE_SEPARATOR);
+				fieldsDisplayValue, FieldExtenderDDMImpl.INSTANCE_SEPARATOR);
 	}
 
 	protected int getFieldOffset(
@@ -411,8 +408,13 @@ public class FieldExtenderDDMFormFieldRenderer implements DDMFormFieldRenderer {
 
 		String fieldsCounterKey = portletNamespace + namespace + "fieldsCount";
 
-		DDMFieldsCounter ddmFieldsCounter =
-				(DDMFieldsCounter)request.getAttribute(fieldsCounterKey);
+		DDMFieldsCounter ddmFieldsCounter;
+
+		try {
+			ddmFieldsCounter = (DDMFieldsCounter)request.getAttribute(fieldsCounterKey);
+		} catch(ClassCastException e) {
+			ddmFieldsCounter = new DDMFieldsCounter();
+		}
 
 		if (ddmFieldsCounter == null) {
 			ddmFieldsCounter = new DDMFieldsCounter();
@@ -430,7 +432,7 @@ public class FieldExtenderDDMFormFieldRenderer implements DDMFormFieldRenderer {
 		String defaultFieldsDisplayValue = null;
 
 		if (fields != null) {
-			Field fieldsDisplayField = fields.get(DDMImpl.FIELDS_DISPLAY_NAME);
+			Field fieldsDisplayField = fields.get(FieldExtenderDDMImpl.FIELDS_DISPLAY_NAME);
 
 			if (fieldsDisplayField != null) {
 				defaultFieldsDisplayValue =
@@ -439,7 +441,7 @@ public class FieldExtenderDDMFormFieldRenderer implements DDMFormFieldRenderer {
 		}
 
 		return ParamUtil.getString(
-				request, DDMImpl.FIELDS_DISPLAY_NAME, defaultFieldsDisplayValue);
+				request, FieldExtenderDDMImpl.FIELDS_DISPLAY_NAME, defaultFieldsDisplayValue);
 	}
 
 	protected String[] getFieldsDisplayValues(String fieldDisplayValue) {
@@ -447,7 +449,7 @@ public class FieldExtenderDDMFormFieldRenderer implements DDMFormFieldRenderer {
 
 		for (String value : StringUtil.split(fieldDisplayValue)) {
 			String fieldName = StringUtil.extractFirst(
-					value, DDMImpl.INSTANCE_SEPARATOR);
+					value, FieldExtenderDDMImpl.INSTANCE_SEPARATOR);
 
 			fieldsDisplayValues.add(fieldName);
 		}
@@ -648,7 +650,7 @@ public class FieldExtenderDDMFormFieldRenderer implements DDMFormFieldRenderer {
 			"com/liferay/dynamic/data/mapping/dependencies/";
 
 	private static final Log _log = LogFactoryUtil.getLog(
-			DDMFormFieldFreeMarkerRenderer.class);
+			FieldExtenderDDMFormFieldRenderer.class);
 
 	private final TemplateResource _defaultReadOnlyTemplateResource;
 	private final TemplateResource _defaultTemplateResource;

@@ -35,7 +35,6 @@
 						<_jsp>*.jsp,*.jspf</_jsp>
 						<_plugin.jsp>com.liferay.ant.bnd.jsp.JspAnalyzerPlugin</_plugin.jsp>
 						<Export-Package>
-							com.liferay.dynamic.data.mapping.render.impl,
 							com.liferay.dynamic.data.mapping.dependencies,
 							com.liferay.dynamic.data.mapping.dependencies.alloy,
 							com.liferay.dynamic.data.mapping.dependencies.ddm,
