@@ -144,6 +144,8 @@ public class FieldExtenderDDMFormFieldRenderer implements DDMFormFieldRenderer {
 		fieldContext.put(
 				"showLabel", Boolean.toString(ddmFormField.isShowLabel()));
 		fieldContext.put("type", ddmFormField.getType());
+
+		//TODO add additional field attributes
 	}
 
 	protected int countFieldRepetition(
