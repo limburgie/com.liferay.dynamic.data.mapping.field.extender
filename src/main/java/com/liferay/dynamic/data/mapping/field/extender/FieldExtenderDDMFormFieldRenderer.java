@@ -413,14 +413,21 @@ public class FieldExtenderDDMFormFieldRenderer implements DDMFormFieldRenderer {
 
 		String fieldsCounterKey = portletNamespace + namespace + "fieldsCount";
 
-		Object ddmFieldsCounterObj = request.getAttribute(fieldsCounterKey);
+		DDMFieldsCounter ddmFieldsCounter;
 
-		if (!(ddmFieldsCounterObj instanceof DDMFieldsCounter)) {
-			//TODO this is not right.
-			return new DDMFieldsCounter();
+		try {
+			ddmFieldsCounter = (DDMFieldsCounter)request.getAttribute(fieldsCounterKey);
+		} catch(ClassCastException e) {
+			ddmFieldsCounter = new DDMFieldsCounter();
 		}
 
-		return (DDMFieldsCounter) ddmFieldsCounterObj;
+		if (ddmFieldsCounter == null) {
+			ddmFieldsCounter = new DDMFieldsCounter();
+
+			request.setAttribute(fieldsCounterKey, ddmFieldsCounter);
+		}
+
+		return ddmFieldsCounter;
 	}
 
 	protected String getFieldsDisplayValue(
