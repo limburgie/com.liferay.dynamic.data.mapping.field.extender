@@ -232,7 +232,7 @@ AUI.add(
 				UNIQUE_FIELD_NAMES_MAP: new A.Map(),
 
 				//TODO add new field attributes to this list
-				UNLOCALIZABLE_FIELD_ATTRS: ['dataType', 'fieldNamespace', 'indexType', 'localizable', 'multiple', 'name', 'readOnly', 'repeatable', 'required', 'showLabel', 'type'],
+				UNLOCALIZABLE_FIELD_ATTRS: ['dataType', 'fieldNamespace', 'indexType', 'localizable', 'multiple', 'name', 'readOnly', 'repeatable', 'required', 'showLabel', 'type', 'restUrl', 'restKey', 'restValue'],
 
 				prototype: {
 					initializer: function() {
@@ -911,8 +911,14 @@ AUI.add(
 					iconClass: 'icon-fb-text-box',
 					label: Liferay.Language.get('text-box'),
 					type: 'textarea'
-				}
+				},
 				//TODO add field type to this list
+				{
+					hiddenAttributes: MAP_HIDDEN_FIELD_ATTRS.DEFAULT,
+					iconClass: 'icon-fb-select',
+					label: 'REST Select',
+					type: 'ddm-rest-select'
+				}
 			],
 
 			DDM_TEMPLATE: [

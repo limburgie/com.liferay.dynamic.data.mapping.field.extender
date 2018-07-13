@@ -15,7 +15,6 @@ import org.osgi.service.component.annotations.Reference;
 import com.liferay.document.library.kernel.service.DLAppLocalService;
 import com.liferay.document.library.kernel.util.DLUtil;
 import com.liferay.dynamic.data.mapping.exception.StructureDefinitionException;
-import com.liferay.dynamic.data.mapping.internal.util.DDMImpl;
 import com.liferay.dynamic.data.mapping.io.DDMFormJSONDeserializer;
 import com.liferay.dynamic.data.mapping.io.DDMFormJSONSerializer;
 import com.liferay.dynamic.data.mapping.io.DDMFormValuesJSONDeserializer;
@@ -223,11 +222,11 @@ public class FieldExtenderDDMImpl implements DDM {
 			ThemeDisplay themeDisplay, Serializable fieldValue, String type)
 			throws Exception {
 
-		if (type.equals(DDMImpl.TYPE_DDM_DATE)) {
+		if (type.equals(TYPE_DDM_DATE)) {
 			fieldValue = DateUtil.formatDate(
 					"yyyy-MM-dd", fieldValue.toString(), themeDisplay.getLocale());
 		}
-		else if (type.equals(DDMImpl.TYPE_CHECKBOX)) {
+		else if (type.equals(TYPE_CHECKBOX)) {
 			Boolean valueBoolean = (Boolean)fieldValue;
 
 			if (valueBoolean) {
@@ -237,7 +236,7 @@ public class FieldExtenderDDMImpl implements DDM {
 				fieldValue = LanguageUtil.get(themeDisplay.getLocale(), "no");
 			}
 		}
-		else if (type.equals(DDMImpl.TYPE_DDM_DOCUMENTLIBRARY)) {
+		else if (type.equals(TYPE_DDM_DOCUMENTLIBRARY)) {
 			if (Validator.isNull(fieldValue)) {
 				return StringPool.BLANK;
 			}
@@ -257,7 +256,7 @@ public class FieldExtenderDDMImpl implements DDM {
 					fileEntry, fileEntry.getFileVersion(), null, StringPool.BLANK,
 					false, true);
 		}
-		else if (type.equals(DDMImpl.TYPE_DDM_LINK_TO_PAGE)) {
+		else if (type.equals(TYPE_DDM_LINK_TO_PAGE)) {
 			if (Validator.isNull(fieldValue)) {
 				return StringPool.BLANK;
 			}
@@ -276,7 +275,7 @@ public class FieldExtenderDDMImpl implements DDM {
 
 			fieldValue = _portal.getLayoutFriendlyURL(layout, themeDisplay);
 		}
-		else if (type.equals(DDMImpl.TYPE_SELECT)) {
+		else if (type.equals(TYPE_SELECT)) {
 			String valueString = String.valueOf(fieldValue);
 
 			JSONArray jsonArray = JSONFactoryUtil.createJSONArray(valueString);
@@ -405,7 +404,7 @@ public class FieldExtenderDDMImpl implements DDM {
 
 			fieldValue = dateFormat.format(valueDate);
 		}
-		else if (type.equals(DDMImpl.TYPE_SELECT)) {
+		else if (type.equals(TYPE_SELECT)) {
 			String valueString = (String)fieldValue;
 
 			JSONArray jsonArray = JSONFactoryUtil.createJSONArray(valueString);
@@ -465,10 +464,10 @@ public class FieldExtenderDDMImpl implements DDM {
 	@Override
 	public Fields mergeFields(Fields newFields, Fields existingFields) {
 		String[] newFieldsDisplayValues = splitFieldsDisplayValue(
-				newFields.get(DDMImpl.FIELDS_DISPLAY_NAME));
+				newFields.get(FIELDS_DISPLAY_NAME));
 
 		String[] existingFieldsDisplayValues = splitFieldsDisplayValue(
-				existingFields.get(DDMImpl.FIELDS_DISPLAY_NAME));
+				existingFields.get(FIELDS_DISPLAY_NAME));
 
 		Iterator<com.liferay.dynamic.data.mapping.storage.Field> itr = newFields.iterator(true);
 
@@ -556,7 +555,7 @@ public class FieldExtenderDDMImpl implements DDM {
 			propertyValue = localizedValue.getString(defaultLocale);
 		}
 
-		if (type.equals(DDMImpl.TYPE_SELECT)) {
+		if (type.equals(TYPE_SELECT)) {
 			if (propertyName.equals("predefinedValue")) {
 				try {
 					jsonObject.put(
@@ -579,8 +578,8 @@ public class FieldExtenderDDMImpl implements DDM {
 
 		String type = ddmFormField.getType();
 
-		if (!(type.equals(DDMImpl.TYPE_RADIO) ||
-				type.equals(DDMImpl.TYPE_SELECT))) {
+		if (!(type.equals(TYPE_RADIO) ||
+				type.equals(TYPE_SELECT))) {
 
 			return;
 		}
@@ -732,6 +731,11 @@ public class FieldExtenderDDMImpl implements DDM {
 			jsonObject.put("type", ddmFormField.getType());
 
 			//TODO if custom field attributes are used, put them on the JSONObject here.
+			if ("ddm-rest-select".equals(ddmFormField.getType())) {
+				jsonObject.put("restUrl", ddmFormField.getProperty("restUrl"));
+				jsonObject.put("restKey", ddmFormField.getProperty("restKey"));
+				jsonObject.put("restValue", ddmFormField.getProperty("restValue"));
+			}
 
 			addDDMFormFieldLocalizedProperties(
 					jsonObject, ddmFormField, defaultLocale, defaultLocale);
@@ -830,7 +834,7 @@ public class FieldExtenderDDMImpl implements DDM {
 
 				if (index < 0) {
 					return StringUtil.extractLast(
-							fieldsDisplayValue, DDMImpl.INSTANCE_SEPARATOR);
+							fieldsDisplayValue, INSTANCE_SEPARATOR);
 				}
 			}
 		}
@@ -898,7 +902,7 @@ public class FieldExtenderDDMImpl implements DDM {
 		for (String fieldsDisplayValue : fieldsDisplayValues) {
 			if (fieldsDisplayValue.startsWith(prefix)) {
 				String fieldIstanceId = StringUtil.extractLast(
-						fieldsDisplayValue, DDMImpl.INSTANCE_SEPARATOR);
+						fieldsDisplayValue, INSTANCE_SEPARATOR);
 
 				if (fieldIstanceId.equals(instanceId)) {
 					return offset;
@@ -937,7 +941,7 @@ public class FieldExtenderDDMImpl implements DDM {
 						serviceContext.getLocale());
 			}
 
-			if (fieldType.equals(DDMImpl.TYPE_CHECKBOX) &&
+			if (fieldType.equals(TYPE_CHECKBOX) &&
 					Validator.isNull(fieldValue)) {
 
 				fieldValue = "false";
@@ -991,7 +995,7 @@ public class FieldExtenderDDMImpl implements DDM {
 				return null;
 			}
 
-			if (DDMImpl.TYPE_SELECT.equals(fieldType)) {
+			if (TYPE_SELECT.equals(fieldType)) {
 				String predefinedValueString = predefinedValue.getString(
 						serviceContext.getLocale());
 
@@ -1267,7 +1271,7 @@ public class FieldExtenderDDMImpl implements DDM {
 		localizedValue.setDefaultLocale(newDefaultLocale);
 	}
 
-	private static final Log _log = LogFactoryUtil.getLog(DDMImpl.class);
+	private static final Log _log = LogFactoryUtil.getLog(FieldExtenderDDMImpl.class);
 
 	private DDMFormJSONDeserializer _ddmFormJSONDeserializer;
 	private DDMFormJSONSerializer _ddmFormJSONSerializer;

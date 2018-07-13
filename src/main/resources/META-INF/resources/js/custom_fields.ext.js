@@ -1965,6 +1965,62 @@ AUI.add(
 		);
 
 		//TODO add new field definitions here
+		var DDMRestSelectField = A.Component.create(
+			{
+				ATTRS: {
+					restUrl: {
+						value: 'http://localhost:8080/api/jsonws'
+					},
+					restKey: {
+						value: ''
+					},
+					restValue: {
+						value: ''
+					},
+					dataType: {
+						value: 'string'
+					},
+					fieldNamespace: {
+						value: 'ddm'
+					}
+				},
+
+				EXTENDS: FormBuilderTextField,
+
+				NAME: 'ddm-rest-select',
+
+				prototype: {
+					getHTML: function() {
+						return '<select class="form-builder-field-node form-control"><option></option></select>';
+					},
+					getPropertyModel: function() {
+						var instance = this;
+
+						var model = originalGetPropertyModel.call(instance);
+
+						return model.concat(
+							[
+								{
+									attributeName: 'restUrl',
+									editor: new A.TextAreaCellEditor(),
+									name: 'Endpoint URL'
+								},
+								{
+									attributeName: 'restKey',
+									editor: new A.TextCellEditor(),
+									name: 'Option label mapping'
+								},
+								{
+									attributeName: 'restValue',
+									editor: new A.TextCellEditor(),
+									name: 'Option value mapping'
+								}
+							]
+						);
+					}
+				}
+			}
+		);
 
 		var plugins = [
 			DDMColorField,
@@ -1981,8 +2037,9 @@ AUI.add(
 			DDMRadioField,
 			DDMSeparatorField,
 			DDMHTMLTextField,
-			DDMTextAreaField
+			DDMTextAreaField,
 			//TODO add field object to this list
+			DDMRestSelectField
 		];
 
 		plugins.forEach(

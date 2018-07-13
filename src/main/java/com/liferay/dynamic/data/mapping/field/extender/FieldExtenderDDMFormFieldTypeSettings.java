@@ -147,4 +147,12 @@ public interface FieldExtenderDDMFormFieldTypeSettings
 	public String visibilityExpression();
 
 	//TODO add any additionally defined DDM field attributes here
+	@DDMFormField(label = "%restUrl")
+	public String restUrl();
+
+	@DDMFormField(label = "%restKey")
+	public String restKey();
+
+	@DDMFormField(label = "%restValue")
+	public String restValue();
 }

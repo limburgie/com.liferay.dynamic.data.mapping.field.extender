@@ -10,15 +10,12 @@ import javax.servlet.http.HttpServletResponse;
 import org.osgi.service.component.annotations.Component;
 
 import com.liferay.dynamic.data.mapping.constants.DDMPortletKeys;
-import com.liferay.dynamic.data.mapping.internal.render.DDMFormFieldFreeMarkerRenderer;
-import com.liferay.dynamic.data.mapping.internal.util.DDMFieldsCounter;
-import com.liferay.dynamic.data.mapping.internal.util.DDMFormFieldFreeMarkerRendererHelper;
-import com.liferay.dynamic.data.mapping.internal.util.DDMImpl;
 import com.liferay.dynamic.data.mapping.model.*;
 import com.liferay.dynamic.data.mapping.render.DDMFormFieldRenderer;
 import com.liferay.dynamic.data.mapping.render.DDMFormFieldRenderingContext;
 import com.liferay.dynamic.data.mapping.storage.Field;
 import com.liferay.dynamic.data.mapping.storage.Fields;
+import com.liferay.dynamic.data.mapping.util.DDMFieldsCounter;
 import com.liferay.portal.kernel.editor.Editor;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.io.unsync.UnsyncStringWriter;
@@ -147,6 +144,11 @@ public class FieldExtenderDDMFormFieldRenderer implements DDMFormFieldRenderer {
 		fieldContext.put(
 				"showLabel", Boolean.toString(ddmFormField.isShowLabel()));
 		fieldContext.put("type", ddmFormField.getType());
+
+		//TODO add additional field attributes
+		fieldContext.put("restUrl", ddmFormField.getProperty("restUrl"));
+		fieldContext.put("restKey", ddmFormField.getProperty("restKey"));
+		fieldContext.put("restValue", ddmFormField.getProperty("restValue"));
 	}
 
 	protected int countFieldRepetition(
@@ -364,7 +366,7 @@ public class FieldExtenderDDMFormFieldRenderer implements DDMFormFieldRenderer {
 		String fieldsDisplayValue = fieldsDisplayValues[offset];
 
 		return StringUtil.extractLast(
-				fieldsDisplayValue, DDMImpl.INSTANCE_SEPARATOR);
+				fieldsDisplayValue, FieldExtenderDDMImpl.INSTANCE_SEPARATOR);
 	}
 
 	protected int getFieldOffset(
@@ -411,16 +413,14 @@ public class FieldExtenderDDMFormFieldRenderer implements DDMFormFieldRenderer {
 
 		String fieldsCounterKey = portletNamespace + namespace + "fieldsCount";
 
-		DDMFieldsCounter ddmFieldsCounter =
-				(DDMFieldsCounter)request.getAttribute(fieldsCounterKey);
+		Object ddmFieldsCounterObj = request.getAttribute(fieldsCounterKey);
 
-		if (ddmFieldsCounter == null) {
-			ddmFieldsCounter = new DDMFieldsCounter();
-
-			request.setAttribute(fieldsCounterKey, ddmFieldsCounter);
+		if (!(ddmFieldsCounterObj instanceof DDMFieldsCounter)) {
+			//TODO this is not right.
+			return new DDMFieldsCounter();
 		}
 
-		return ddmFieldsCounter;
+		return (DDMFieldsCounter) ddmFieldsCounterObj;
 	}
 
 	protected String getFieldsDisplayValue(
@@ -430,7 +430,7 @@ public class FieldExtenderDDMFormFieldRenderer implements DDMFormFieldRenderer {
 		String defaultFieldsDisplayValue = null;
 
 		if (fields != null) {
-			Field fieldsDisplayField = fields.get(DDMImpl.FIELDS_DISPLAY_NAME);
+			Field fieldsDisplayField = fields.get(FieldExtenderDDMImpl.FIELDS_DISPLAY_NAME);
 
 			if (fieldsDisplayField != null) {
 				defaultFieldsDisplayValue =
@@ -439,7 +439,7 @@ public class FieldExtenderDDMFormFieldRenderer implements DDMFormFieldRenderer {
 		}
 
 		return ParamUtil.getString(
-				request, DDMImpl.FIELDS_DISPLAY_NAME, defaultFieldsDisplayValue);
+				request, FieldExtenderDDMImpl.FIELDS_DISPLAY_NAME, defaultFieldsDisplayValue);
 	}
 
 	protected String[] getFieldsDisplayValues(String fieldDisplayValue) {
@@ -447,7 +447,7 @@ public class FieldExtenderDDMFormFieldRenderer implements DDMFormFieldRenderer {
 
 		for (String value : StringUtil.split(fieldDisplayValue)) {
 			String fieldName = StringUtil.extractFirst(
-					value, DDMImpl.INSTANCE_SEPARATOR);
+					value, FieldExtenderDDMImpl.INSTANCE_SEPARATOR);
 
 			fieldsDisplayValues.add(fieldName);
 		}
@@ -640,7 +640,7 @@ public class FieldExtenderDDMFormFieldRenderer implements DDMFormFieldRenderer {
 	private static final String _DEFAULT_READ_ONLY_NAMESPACE = "readonly";
 
 	//TODO add custom field types to this list
-	private static final String[] _SUPPORTED_DDM_FORM_FIELD_TYPES = { };
+	private static final String[] _SUPPORTED_DDM_FORM_FIELD_TYPES = { "ddm-rest-select" };
 
 	private static final String _TPL_EXT = ".ftl";
 
@@ -648,7 +648,7 @@ public class FieldExtenderDDMFormFieldRenderer implements DDMFormFieldRenderer {
 			"com/liferay/dynamic/data/mapping/dependencies/";
 
 	private static final Log _log = LogFactoryUtil.getLog(
-			DDMFormFieldFreeMarkerRenderer.class);
+			FieldExtenderDDMFormFieldRenderer.class);
 
 	private final TemplateResource _defaultReadOnlyTemplateResource;
 	private final TemplateResource _defaultTemplateResource;
