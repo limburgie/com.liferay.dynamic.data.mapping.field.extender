@@ -31,7 +31,7 @@ import com.liferay.portal.kernel.util.Validator;
  * @author Pedro Queiroz
  */
 @Component(
-		immediate = true, service = DDMFormFieldFreeMarkerRendererHelper.class
+	immediate = true, service = DDMFormFieldFreeMarkerRendererHelper.class
 )
 public class DDMFormFieldFreeMarkerRendererHelper {
 
@@ -52,9 +52,9 @@ public class DDMFormFieldFreeMarkerRendererHelper {
 	}
 
 	@Reference(
-			cardinality = ReferenceCardinality.MULTIPLE,
-			policy = ReferencePolicy.DYNAMIC,
-			policyOption = ReferencePolicyOption.GREEDY
+		cardinality = ReferenceCardinality.MULTIPLE,
+		policy = ReferencePolicy.DYNAMIC,
+		policyOption = ReferencePolicyOption.GREEDY
 	)
 	protected void addEditor(Editor editor) {
 		_editors.put(editor.getName(), editor);
@@ -65,12 +65,12 @@ public class DDMFormFieldFreeMarkerRendererHelper {
 	}
 
 	private static final String _EDITOR_WYSIWYG_DEFAULT = PropsUtil.get(
-			PropsKeys.EDITOR_WYSIWYG_DEFAULT);
+		PropsKeys.EDITOR_WYSIWYG_DEFAULT);
 
 	private static final String _TEXT_HTML_EDITOR_WYSIWYG_DEFAULT =
-			PropsUtil.get("editor.wysiwyg.portal-impl.portlet.ddm.text_html.ftl");
+		PropsUtil.get("editor.wysiwyg.portal-impl.portlet.ddm.text_html.ftl");
 
 	private static final Map<String, Editor> _editors =
-			new ConcurrentHashMap<>();
+		new ConcurrentHashMap<>();
 
 }
