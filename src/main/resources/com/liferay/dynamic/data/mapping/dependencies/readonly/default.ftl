@@ -10,14 +10,14 @@
 	<#if hasFieldValue>
 		<#if !disabled>
 			<@liferay_aui.input
-				name=namespacedFieldName
-				type="hidden"
-				value=fieldValue
+			name=namespacedFieldName
+			type="hidden"
+			value=fieldValue
 			/>
 		</#if>
 
 		${escape(fieldValue)}
 	</#if>
 
-	${fieldStructure.children}
+${fieldStructure.children}
 </div>
