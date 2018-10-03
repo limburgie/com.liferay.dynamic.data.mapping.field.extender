@@ -59,6 +59,7 @@ import com.liferay.portal.kernel.util.StringPool;
 				)
 		}
 )
+
 public interface FieldExtenderDDMFormFieldTypeSettings extends DDMFormFieldTypeSettings {
 
 	@DDMFormField(visibilityExpression = "FALSE")
@@ -77,14 +78,17 @@ public interface FieldExtenderDDMFormFieldTypeSettings extends DDMFormFieldTypeS
 	@DDMFormField(
 			label = "%label",
 			properties = {
-					"placeholder=%enter-a-field-label",
+					"autoFocus=true", "placeholder=%enter-a-field-label",
 					"tooltip=%enter-a-descriptive-field-label-that-guides-users-to-enter-the-information-you-want"
 			},
-			required = true, type = "key-value"
+			type = "key_value"
 	)
 	public LocalizedValue label();
 
-	@DDMFormField(label = "%localizable", visibilityExpression = "FALSE")
+	@DDMFormField(
+			label = "%localizable", predefinedValue = "true",
+			visibilityExpression = "FALSE"
+	)
 	public boolean localizable();
 
 	@DDMFormField(
@@ -130,16 +134,16 @@ public interface FieldExtenderDDMFormFieldTypeSettings extends DDMFormFieldTypeS
 	public DDMFormFieldValidation validation();
 
 	/**
-	 * @deprecated As of 2.0.0
+	 * @deprecated As of Judson (7.1.x)
 	 */
 	@DDMFormField(
 			label = "%field-visibility-expression",
 			properties = {
 					"placeholder=%equals(Country, \"US\")",
 					"tooltip=%write-a-conditional-expression-to-control-whether-this-field-is-displayed"
-			}
+			},
+			visibilityExpression = "FALSE"
 	)
 	@Deprecated
 	public String visibilityExpression();
-
 }
