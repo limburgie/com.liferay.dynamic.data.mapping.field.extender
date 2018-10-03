@@ -730,8 +730,6 @@ public class FieldExtenderDDMImpl implements DDM {
 			jsonObject.put("showLabel", ddmFormField.isShowLabel());
 			jsonObject.put("type", ddmFormField.getType());
 
-			//TODO if custom field attributes are used, put them on the JSONObject here.
-
 			addDDMFormFieldLocalizedProperties(
 					jsonObject, ddmFormField, defaultLocale, defaultLocale);
 

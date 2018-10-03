@@ -87,26 +87,20 @@ public class FieldExtenderDDMFormFieldRenderer implements DDMFormFieldRenderer {
 			Map<String, Object> freeMarkerContext, StringBundler sb,
 			String label, String value)
 			throws Exception {
-
 		Map<String, Object> fieldStructure = new HashMap<>();
-
 		fieldStructure.put("children", StringPool.BLANK);
 		fieldStructure.put("fieldNamespace", StringUtil.randomId());
 		fieldStructure.put("label", label);
 		fieldStructure.put("name", StringUtil.randomId());
 		fieldStructure.put("value", value);
-
 		freeMarkerContext.put("fieldStructure", fieldStructure);
-
 		sb.append(
 				processFTL(
 						request, response, ddmFormField.getFieldNamespace(), "option",
 						mode, readOnly, freeMarkerContext));
 	}
 
-	protected void addLayoutProperties(
-			DDMFormField ddmFormField, Map<String, Object> fieldContext,
-			Locale locale) {
+	protected void addLayoutProperties(DDMFormField ddmFormField, Map<String, Object> fieldContext, Locale locale) {
 
 		LocalizedValue label = ddmFormField.getLabel();
 
@@ -362,8 +356,7 @@ public class FieldExtenderDDMFormFieldRenderer implements DDMFormFieldRenderer {
 
 		String fieldsDisplayValue = fieldsDisplayValues[offset];
 
-		return StringUtil.extractLast(
-				fieldsDisplayValue, FieldExtenderDDMImpl.INSTANCE_SEPARATOR);
+		return StringUtil.extractLast(fieldsDisplayValue, FieldExtenderDDMImpl.INSTANCE_SEPARATOR);
 	}
 
 	protected int getFieldOffset(
@@ -442,16 +435,14 @@ public class FieldExtenderDDMFormFieldRenderer implements DDMFormFieldRenderer {
 			}
 		}
 
-		return ParamUtil.getString(
-				request, FieldExtenderDDMImpl.FIELDS_DISPLAY_NAME, defaultFieldsDisplayValue);
+		return ParamUtil.getString(request, FieldExtenderDDMImpl.FIELDS_DISPLAY_NAME, defaultFieldsDisplayValue);
 	}
 
 	protected String[] getFieldsDisplayValues(String fieldDisplayValue) {
 		List<String> fieldsDisplayValues = new ArrayList<>();
 
 		for (String value : StringUtil.split(fieldDisplayValue)) {
-			String fieldName = StringUtil.extractFirst(
-					value, FieldExtenderDDMImpl.INSTANCE_SEPARATOR);
+			String fieldName = StringUtil.extractFirst(value, FieldExtenderDDMImpl.INSTANCE_SEPARATOR);
 
 			fieldsDisplayValues.add(fieldName);
 		}
@@ -508,9 +499,7 @@ public class FieldExtenderDDMFormFieldRenderer implements DDMFormFieldRenderer {
 		freeMarkerContext.put("namespace", namespace);
 		freeMarkerContext.put("parentFieldStructure", parentFieldContext);
 		freeMarkerContext.put("portletNamespace", portletNamespace);
-		freeMarkerContext.put(
-				"requestedLanguageDir",
-				LanguageUtil.get(locale, LanguageConstants.KEY_DIR));
+		freeMarkerContext.put("requestedLanguageDir", LanguageUtil.get(locale, LanguageConstants.KEY_DIR));
 		freeMarkerContext.put("requestedLocale", locale);
 		freeMarkerContext.put("showEmptyFieldLabel", showEmptyFieldLabel);
 
@@ -644,7 +633,7 @@ public class FieldExtenderDDMFormFieldRenderer implements DDMFormFieldRenderer {
 	private static final String _DEFAULT_READ_ONLY_NAMESPACE = "readonly";
 
 	//TODO add custom field types to this list
-	private static final String[] _SUPPORTED_DDM_FORM_FIELD_TYPES = { };
+	private static final String[] _SUPPORTED_DDM_FORM_FIELD_TYPES = { "ddm-users" };
 
 	private static final String _TPL_EXT = ".ftl";
 

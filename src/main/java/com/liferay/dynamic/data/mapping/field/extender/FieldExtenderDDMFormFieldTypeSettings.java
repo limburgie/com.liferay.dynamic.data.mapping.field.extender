@@ -49,8 +49,8 @@ import com.liferay.portal.kernel.util.StringPool;
 												@DDMFormLayoutColumn(
 														size = 12,
 														value = {
-																"dataType", "name", "showLabel", "repeatable",
-																"type", "validation", "visibilityExpression"
+															"dataType", "name", "showLabel", "repeatable",
+															"type", "validation", "visibilityExpression"
 														}
 												)
 										}
@@ -59,8 +59,8 @@ import com.liferay.portal.kernel.util.StringPool;
 				)
 		}
 )
-public interface FieldExtenderDDMFormFieldTypeSettings
-		extends DDMFormFieldTypeSettings {
+
+public interface FieldExtenderDDMFormFieldTypeSettings extends DDMFormFieldTypeSettings {
 
 	@DDMFormField(visibilityExpression = "FALSE")
 	public String fieldNamespace();
@@ -70,8 +70,7 @@ public interface FieldExtenderDDMFormFieldTypeSettings
 			optionLabels = {
 					"%not-indexable", "%indexable-keyword", "%indexable-text"
 			},
-			optionValues = {StringPool.BLANK, "keyword", "text"},
-			predefinedValue = "keyword", type = "radio",
+			optionValues = {StringPool.BLANK, "keyword", "text"}, type = "select",
 			visibilityExpression = "FALSE"
 	)
 	public String indexType();
@@ -108,14 +107,16 @@ public interface FieldExtenderDDMFormFieldTypeSettings
 	@DDMFormField(label = "%repeatable", properties = "showAsSwitcher=true")
 	public boolean repeatable();
 
-	@DDMFormField(label = "%required-field", properties = "showAsSwitcher=true")
+	@DDMFormField(
+			label = "%required-field", properties = "showAsSwitcher=true"
+	)
 	public boolean required();
 
-	@DDMFormField(
-			label = "%show-label", predefinedValue = "true",
-			properties = "showAsSwitcher=true"
-	)
+	@DDMFormField(label = "%show-label", properties = "showAsSwitcher=true")
 	public boolean showLabel();
+
+	@DDMFormField(label = "%multiItem")
+	public String multiItem();
 
 	@DDMFormField(
 			label = "%help-text",
@@ -145,6 +146,4 @@ public interface FieldExtenderDDMFormFieldTypeSettings
 	)
 	@Deprecated
 	public String visibilityExpression();
-
-	//TODO add any additionally defined DDM field attributes here
 }
